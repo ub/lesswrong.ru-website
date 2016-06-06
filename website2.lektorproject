@@ -1,2 +1,3 @@
 [project]
-name = website2
+name = LessWrong.ru
+locale = ru_RU
