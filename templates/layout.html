@@ -1,28 +1,68 @@
 <!doctype html>
 <meta charset="utf-8">
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<title>{% block title %}Welcome{% endblock %} — website2</title>
+<link rel="stylesheet" href="{{ '/static/normalize.css'|url }}">
+<title>{% block title %}LessWrong на русском | Статьи по рациональному мышлению{% endblock %}</title>
 <body>
-  <header>
-    <h1>website2</h1>
-    <nav>
-      <ul class="nav navbar-nav">
-        <li{% if this._path == '/' %} class="active"{% endif
-          %}><a href="{{ '/'|url }}">Welcome</a></li>
-        {% for href, title in [
-          ['/projects', 'Projects'],
-          ['/about', 'About']
-        ] %}
+  <div class="main">
+    <div class="left-column">
+      <img src="{{ '/static/lw.png' | url }}">
+      <nav>
+        <ul class="nav navbar-nav">
+          {% for href, title in [
+          ['/Электронные_книги', 'Электронные книги'],
+          ['/Список_литературы', 'Список литературы'],
+          ['/forum', 'Рациональный форум'],
+          ['http://umneem.org', 'Умнеем вместе'],
+          ['http://umneem.org/встречи', 'Встречи']
+          ] %}
           <li{% if this.is_child_of(href) %} class="active"{% endif
             %}><a href="{{ href|url }}">{{ title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </header>
-  <div class="page">
-    {% block body %}{% endblock %}
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <div class="left-column--more">
+        {% block left_column_more %}
+        {% endblock %}
+      </div>
+
+      {% block search_form %}
+      <!-- configured by berekuk@ at cse.google.com -->
+      <script>
+       (function() {
+         var cx = '009730056989245212522:vhyljjg5gik';
+         var gcse = document.createElement('script');
+         gcse.type = 'text/javascript';
+         gcse.async = true;
+         gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+         var s = document.getElementsByTagName('script')[0];
+         s.parentNode.insertBefore(gcse, s);
+       })();
+      </script>
+      <gcse:search></gcse:search>
+      {% endblock %}
+
+      {% block vk_widget %}
+      <div class="vkwidget">
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?105"></script>
+
+        <div id="vk_groups"></div>
+        <script type="text/javascript">
+        VK.Widgets.Group("vk_groups", {mode: 0, width: "196", height: "272", color1: 'FFFFFF', color2: '000000', color3: 'B6B6B6'}, 65688570);
+        </script>
+      </div>
+      {% endblock %}
+
+    </div>
+
+    <div class="page">
+      <header class="page-header">
+        <h1><a href="{{ '/' | url }}">LessWrong на русском</a></h1>
+        <h2>Статьи по рациональному мышлению</h2>
+      </header>
+
+      {% block body %}{% endblock %}
+    </div>
   </div>
-  <footer>
-    &copy; Copyright 2016 by Vyacheslav Matyukhin.
-  </footer>
 </body>
